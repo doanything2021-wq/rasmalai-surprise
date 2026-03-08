@@ -27,24 +27,18 @@ height:100vh;
 }
 
 .balloon{
-
 width:80px;
 height:100px;
 border-radius:50%;
 position:absolute;
 cursor:pointer;
-
 background:radial-gradient(circle at 30% 30%,#ff9bb3,#ff4d6d);
-
-animation:float 8s ease-in-out infinite;
-
+animation:float 7s ease-in-out infinite;
 }
 
 .balloon:nth-child(even){
 background:radial-gradient(circle at 30% 30%,#ffd166,#ff9f1c);
 }
-
-/* balloon tail */
 
 .balloon:after{
 content:"";
@@ -56,20 +50,15 @@ bottom:-45px;
 left:50%;
 }
 
-/* floating movement */
-
 @keyframes float{
-
 0%{transform:translateY(0)}
 50%{transform:translateY(-20px)}
 100%{transform:translateY(0)}
-
 }
 
 /* popup */
 
 #popup{
-
 display:none;
 position:fixed;
 top:50%;
@@ -80,7 +69,6 @@ padding:20px;
 border-radius:15px;
 box-shadow:0 0 20px rgba(0,0,0,0.3);
 z-index:5;
-
 }
 
 #popup img{
@@ -98,6 +86,29 @@ border-radius:6px;
 cursor:pointer;
 }
 
+/* star burst */
+
+.star{
+position:absolute;
+color:gold;
+font-size:20px;
+animation:burst 0.7s ease-out forwards;
+}
+
+@keyframes burst{
+0%{opacity:1;transform:scale(0)}
+100%{opacity:0;transform:scale(2) translateY(-30px)}
+}
+
+/* typing text */
+
+#typing{
+font-size:32px;
+font-weight:bold;
+margin-top:120px;
+color:#ff2e63;
+}
+
 </style>
 </head>
 
@@ -108,40 +119,35 @@ cursor:pointer;
 <div id="sky"></div>
 
 <div id="popup">
-
 <img id="img">
 <p id="msg"></p>
-
 <button onclick="closePop()">Close</button>
-
 </div>
 
 <script>
 
 const sky=document.getElementById("sky")
-
 let opened=0
 
 const messages=[
 
 "My Little Rasmalai ✨🫀😍",
-"Cutiee woman holding less cute her flower ✨🎀",
+"Cutiee women holding less cute her flower ✨🎀",
 "Can I get some yoga lessons ma'am ji 😄🧘🏻‍♂️",
 "Bestest moment of my life 🤌🏻✨🎀",
-"My Snow Woman ✨😘",
-"My cutie panda 🐼 24/7 sleep mode",
+"My Snow women ✨😘",
+"My cutie Panda 🐼✨🎀😘",
 "My Sanskari Women 🌸✨🛐",
-"Koi itna khubsurat kaise ho sakta hai 🧿",
+"Itni Khubsurat koi kaise dekh sakta hai 24/7 🧿✨",
 "My sweet Green Apple 🍏😋✨"
 
 ]
 
-/* create balloons randomly */
+/* create balloons */
 
 for(let i=1;i<=9;i++){
 
 let b=document.createElement("div")
-
 b.className="balloon"
 
 b.style.left=Math.random()*90+"vw"
@@ -153,9 +159,31 @@ sky.appendChild(b)
 
 }
 
+function starBurst(x,y){
+
+for(let i=0;i<6;i++){
+
+let s=document.createElement("div")
+s.className="star"
+s.innerHTML="⭐"
+
+s.style.left=x+"px"
+s.style.top=y+"px"
+
+document.body.appendChild(s)
+
+setTimeout(()=>s.remove(),700)
+
+}
+
+}
+
 function show(i,balloon){
 
 opened++
+
+let rect=balloon.getBoundingClientRect()
+starBurst(rect.left,rect.top)
 
 balloon.style.visibility="hidden"
 
@@ -165,7 +193,7 @@ document.getElementById("msg").innerText=messages[i-1]
 
 if(opened===9){
 
-setTimeout(finalPage,1500)
+setTimeout(showTyping,1500)
 
 }
 
@@ -177,32 +205,79 @@ document.getElementById("popup").style.display="none"
 
 }
 
+function showTyping(){
+
+document.body.innerHTML=`<div id="typing"></div>`
+
+let text="I Love You Hetal ❤️"
+let i=0
+
+function type(){
+
+if(i<text.length){
+
+document.getElementById("typing").innerHTML+=text.charAt(i)
+i++
+setTimeout(type,100)
+
+}else{
+
+setTimeout(finalPage,1200)
+
+}
+
+}
+
+type()
+
+}
+
 function finalPage(){
 
 document.body.innerHTML=`
 
-<h1>Happy Women's Day My Rasmalai ✨</h1>
+<h1>Happy Women's Day, My Rasmalai ✨</h1>
 
-<div style="max-width:500px;margin:auto;font-size:18px;line-height:1.6">
+<div style="max-width:520px;margin:auto;font-size:18px;line-height:1.6">
 
-Happy Women's Day to My Smart Beautiful Sexy Strong Women 🎀✨🫶🏻🌻🪷🌸👑👑<br><br>
+Happy Women's Day to My Smart Beautiful Sexy Strong Women🎀✨🫶🏻🌻🪷🌸👑👑 You're truly Incredible one and only My Hetal Bacha💪🏻🦵🏻🧘🏻‍♂️✨<br><br>
 
-Aaj ka din bas ek reminder hai ki aap kitni amazing ho but sach toh yeh hai ki
-aapko celebrate karne ke liye ek din kaafi nahi hai.
-For me every day is My Women's Day ❤️👑✨🎀<br><br>
+Aaj ka din bas ek reminder hai ki aap kitni amazing ho but sach toh yeh hai ki aapko celebrate karne ke liye ek din kaafi nahi haifor me every day is My Women's Day 🏵️ ❤️ 👑✨🎀<br><br>
 
-Sach bolo toh bacha aapke aane ke baad meri life kaafi zyada beautiful ho gayi hai.
-Pehle life normal thi par ab usme ek alag si happiness aa gayi hai.<br><br>
+Sach bolo toh bacha aapke aane ke baad meri life kaafi zyada beautiful ho gayi hai Pehle life normal thi par ab usme ek alag si happiness aa gayi hai Aapki smile, aapki baatein, aur aapka simple sa caring Nature yeh sab meri life ko aur pyaara bana dete hain🥹🎀🫶🏻<br><br>
 
-Aapki smile, aapki baatein aur aapka caring nature meri life ko aur pyaara bana dete hain 🥹🎀🫶🏻<br><br>
+Bacha Aapke saath simple moments bhi special feel hote hain🫂🫀❤️‍🔥✨🧿<br><br>
 
-Bacha aapke saath simple moments bhi special feel hote hain 🫂🫀❤️‍🔥✨🧿<br><br>
-
-Aap meri life mein ho uske liye main Bhagwan ji ka bohot shukraguzaar hoon 🙏🏻🛐
+Aap jaise women meri life me uske liye me bohot zyada thankful ho bhagwan ji 🙏🏻🛐😭🥹
 
 </div>
 
 `
+
+confetti()
+
+}
+
+function confetti(){
+
+for(let i=0;i<120;i++){
+
+let c=document.createElement("div")
+c.style.position="fixed"
+c.style.width="6px"
+c.style.height="6px"
+c.style.background=["#ff4d6d","#ffd166","#2ec4b6"][Math.floor(Math.random()*3)]
+c.style.left=Math.random()*100+"vw"
+c.style.top="-10px"
+c.style.opacity="0.8"
+c.style.borderRadius="50%"
+c.style.transition="top 3s linear"
+
+document.body.appendChild(c)
+
+setTimeout(()=>{c.style.top="110vh"},10)
+
+}
 
 }
 
