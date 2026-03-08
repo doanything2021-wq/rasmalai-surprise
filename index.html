@@ -1,35 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Happy Women's Day Rasmalai</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Women's Day Rasmalai</title>
 
 <style>
+
 body{
 font-family:Arial;
 text-align:center;
 background:linear-gradient(#ffe6f0,#ffffff);
+margin:0;
+padding:20px;
+}
+
+h1{
+margin-top:20px;
+}
+
+.container{
+margin-top:40px;
 }
 
 .balloon{
 width:90px;
 height:110px;
 border-radius:50%;
-background:#ff4d6d;
 display:inline-block;
 margin:20px;
 cursor:pointer;
 position:relative;
+background:#ff4d6d;
+}
+
+.balloon:nth-child(even){
+background:#ff9f1c;
 }
 
 .balloon:after{
 content:"";
 width:2px;
 height:40px;
-background:#555;
+background:#444;
 position:absolute;
 bottom:-40px;
 left:50%;
+transform:translateX(-50%);
 }
 
 .popup{
@@ -40,12 +56,24 @@ left:50%;
 transform:translate(-50%,-50%);
 background:white;
 padding:20px;
-border-radius:10px;
+border-radius:12px;
+box-shadow:0 0 20px rgba(0,0,0,0.3);
 }
 
 .popup img{
-width:220px;
+width:230px;
+border-radius:8px;
 }
+
+button{
+margin-top:10px;
+padding:8px 15px;
+border:none;
+background:#ff4d6d;
+color:white;
+border-radius:6px;
+}
+
 </style>
 </head>
 
@@ -54,38 +82,44 @@ width:220px;
 <h1>Happy Women's Day My Rasmalai ✨</h1>
 <p>Pop all the balloons 🎈</p>
 
-<div onclick="show(1)" class="balloon"></div>
-<div onclick="show(2)" class="balloon"></div>
-<div onclick="show(3)" class="balloon"></div>
-<div onclick="show(4)" class="balloon"></div>
-<div onclick="show(5)" class="balloon"></div>
-<div onclick="show(6)" class="balloon"></div>
-<div onclick="show(7)" class="balloon"></div>
-<div onclick="show(8)" class="balloon"></div>
-<div onclick="show(9)" class="balloon"></div>
+<div class="container">
+
+<div class="balloon" onclick="show(1)"></div>
+<div class="balloon" onclick="show(2)"></div>
+<div class="balloon" onclick="show(3)"></div>
+<div class="balloon" onclick="show(4)"></div>
+<div class="balloon" onclick="show(5)"></div>
+<div class="balloon" onclick="show(6)"></div>
+<div class="balloon" onclick="show(7)"></div>
+<div class="balloon" onclick="show(8)"></div>
+<div class="balloon" onclick="show(9)"></div>
+
+</div>
 
 <div id="popup" class="popup">
+
 <img id="img">
 <p id="msg"></p>
 <button onclick="closePop()">Close</button>
+
 </div>
 
 <script>
 
-<script>
+let opened = 0;
 
-let opened=0;
+const messages = [
 
-const text=[
 "My Little Rasmalai ✨🫀😍",
 "Cutiee woman holding less cute her flower ✨🎀",
-"Can I get some yoga lessons ma'am ji 😄",
-"Bestest moment of my life ✨",
+"Can I get some yoga lessons ma'am ji 😄🧘🏻‍♂️",
+"Bestest moment of my life 🤌🏻✨🎀",
 "My Snow Woman ✨😘",
-"My cutie panda 🐼 sleep mode",
-"My Sanskari Women 🌸✨",
-"Koi itna khubsurat kaise ho sakta hai 🧿",
+"My cutie panda 🐼 24/7 sleep mode",
+"My Sanskari Women 🌸✨🛐",
+"Koi itna khubsurat 24/7 kaise ho sakta hai 🧿",
 "My sweet Green Apple 🍏😋✨"
+
 ];
 
 function show(i){
@@ -94,11 +128,11 @@ opened++;
 
 document.getElementById("popup").style.display="block";
 document.getElementById("img").src=i+".jpg";
-document.getElementById("msg").innerText=text[i-1];
+document.getElementById("msg").innerText=messages[i-1];
 
-if(opened==9){
+if(opened===9){
 
-setTimeout(finalMessage,1500);
+setTimeout(finalPage,1200);
 
 }
 
@@ -110,10 +144,9 @@ document.getElementById("popup").style.display="none";
 
 }
 
-function finalMessage(){
+function finalPage(){
 
-document.body.innerHTML=`
-
+document.body.innerHTML = `
 <h1>Happy Women's Day My Rasmalai ✨</h1>
 
 <div style="max-width:500px;margin:auto;font-size:18px;line-height:1.6">
@@ -138,3 +171,6 @@ Aap meri life mein ho uske liye main Bhagwan ji ka bohot shukraguzaar hoon 🙏�
 }
 
 </script>
+
+</body>
+</html>
