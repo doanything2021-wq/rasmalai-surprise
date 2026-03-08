@@ -72,6 +72,10 @@ width:220px;
 
 <script>
 
+<script>
+
+let opened=0;
+
 const text=[
 "My Little Rasmalai ✨🫀😍",
 "Cutiee woman holding less cute her flower ✨🎀",
@@ -85,16 +89,52 @@ const text=[
 ];
 
 function show(i){
+
+opened++;
+
 document.getElementById("popup").style.display="block";
 document.getElementById("img").src=i+".jpg";
 document.getElementById("msg").innerText=text[i-1];
+
+if(opened==9){
+
+setTimeout(finalMessage,1500);
+
+}
+
 }
 
 function closePop(){
+
 document.getElementById("popup").style.display="none";
+
+}
+
+function finalMessage(){
+
+document.body.innerHTML=`
+
+<h1>Happy Women's Day My Rasmalai ✨</h1>
+
+<div style="max-width:500px;margin:auto;font-size:18px;line-height:1.6">
+
+Happy Women's Day to My Smart Beautiful Sexy Strong Women 🎀✨🫶🏻🌻🪷🌸👑👑<br><br>
+
+Aaj ka din bas ek reminder hai ki aap kitni amazing ho but sach toh yeh hai ki aapko celebrate karne ke liye ek din kaafi nahi hai.  
+For me every day is My Women's Day ❤️👑✨🎀<br><br>
+
+Sach bolo toh bacha aapke aane ke baad meri life kaafi zyada beautiful ho gayi hai.  
+Pehle life normal thi par ab usme ek alag si happiness aa gayi hai.<br><br>
+
+Aapki smile, aapki baatein aur aapka caring nature meri life ko aur pyaara bana dete hain 🥹🎀🫶🏻<br><br>
+
+Bacha aapke saath simple moments bhi special feel hote hain 🫂🫀❤️‍🔥✨🧿<br><br>
+
+Aap meri life mein ho uske liye main Bhagwan ji ka bohot shukraguzaar hoon 🙏🏻🛐
+
+</div>
+`;
+
 }
 
 </script>
-
-</body>
-</html>
