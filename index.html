@@ -10,60 +10,66 @@ body{
 margin:0;
 overflow:hidden;
 font-family:Arial;
-background:linear-gradient(#ffe6f0,#ffffff);
+background:linear-gradient(#ffd6e7,#ffffff);
 text-align:center;
 }
 
 h1{
-margin-top:20px;
-}
-
-.sky{
-position:relative;
+position:absolute;
+top:10px;
 width:100%;
-height:80vh;
 }
 
-/* balloons */
+#sky{
+position:relative;
+width:100vw;
+height:100vh;
+}
 
 .balloon{
+
 width:80px;
 height:100px;
 border-radius:50%;
 position:absolute;
 cursor:pointer;
-animation:float 12s linear infinite;
-}
 
-.balloon:nth-child(odd){
-background:radial-gradient(circle at 30% 30%,#ff8fab,#ff4d6d);
+background:radial-gradient(circle at 30% 30%,#ff9bb3,#ff4d6d);
+
+animation:float 8s ease-in-out infinite;
+
 }
 
 .balloon:nth-child(even){
 background:radial-gradient(circle at 30% 30%,#ffd166,#ff9f1c);
 }
 
-/* tail */
+/* balloon tail */
 
 .balloon:after{
 content:"";
 width:2px;
-height:40px;
+height:45px;
 background:#555;
 position:absolute;
-bottom:-40px;
+bottom:-45px;
 left:50%;
-transform:translateX(-50%);
 }
 
+/* floating movement */
+
 @keyframes float{
-0%{transform:translateY(100vh);}
-100%{transform:translateY(-120vh);}
+
+0%{transform:translateY(0)}
+50%{transform:translateY(-20px)}
+100%{transform:translateY(0)}
+
 }
 
 /* popup */
 
-.popup{
+#popup{
+
 display:none;
 position:fixed;
 top:50%;
@@ -71,13 +77,14 @@ left:50%;
 transform:translate(-50%,-50%);
 background:white;
 padding:20px;
-border-radius:12px;
-box-shadow:0 0 25px rgba(0,0,0,0.3);
-z-index:10;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,0,0,0.3);
+z-index:5;
+
 }
 
-.popup img{
-width:230px;
+#popup img{
+width:240px;
 border-radius:10px;
 }
 
@@ -88,20 +95,7 @@ border:none;
 background:#ff4d6d;
 color:white;
 border-radius:6px;
-}
-
-/* stars */
-
-.star{
-position:fixed;
-color:gold;
-font-size:20px;
-animation:starpop 1s forwards;
-}
-
-@keyframes starpop{
-0%{transform:scale(0)}
-100%{transform:scale(1.5) translateY(-80px);opacity:0}
+cursor:pointer;
 }
 
 </style>
@@ -109,22 +103,27 @@ animation:starpop 1s forwards;
 
 <body>
 
-<h1>Happy Women's Day My Rasmalai ✨</h1>
-<p>Pop the floating balloons 🎈</p>
+<h1>Pop all the balloons 🎈</h1>
 
-<div class="sky" id="sky"></div>
+<div id="sky"></div>
 
-<div id="popup" class="popup">
+<div id="popup">
+
 <img id="img">
 <p id="msg"></p>
+
 <button onclick="closePop()">Close</button>
+
 </div>
 
 <script>
 
-let opened=0;
+const sky=document.getElementById("sky")
+
+let opened=0
 
 const messages=[
+
 "My Little Rasmalai ✨🫀😍",
 "Cutiee woman holding less cute her flower ✨🎀",
 "Can I get some yoga lessons ma'am ji 😄🧘🏻‍♂️",
@@ -132,71 +131,51 @@ const messages=[
 "My Snow Woman ✨😘",
 "My cutie panda 🐼 24/7 sleep mode",
 "My Sanskari Women 🌸✨🛐",
-"Koi itna khubsurat 24/7 kaise ho sakta hai 🧿",
+"Koi itna khubsurat kaise ho sakta hai 🧿",
 "My sweet Green Apple 🍏😋✨"
-];
 
-const sky=document.getElementById("sky");
+]
 
-/* create balloons */
+/* create balloons randomly */
 
 for(let i=1;i<=9;i++){
 
-let b=document.createElement("div");
-b.className="balloon";
+let b=document.createElement("div")
 
-b.style.left=Math.random()*90+"%";
-b.style.animationDuration=(10+Math.random()*10)+"s";
+b.className="balloon"
 
-b.onclick=function(){show(i,b)};
+b.style.left=Math.random()*90+"vw"
+b.style.top=Math.random()*80+"vh"
 
-sky.appendChild(b);
+b.onclick=function(){show(i,b)}
 
-}
-
-/* balloon click */
-
-function show(i,el){
-
-opened++;
-
-el.remove();
-
-document.getElementById("popup").style.display="block";
-document.getElementById("img").src=i+".jpg";
-document.getElementById("msg").innerText=messages[i-1];
-
-/* star burst */
-
-for(let k=0;k<8;k++){
-
-let s=document.createElement("div");
-
-s.className="star";
-s.innerHTML="⭐";
-
-s.style.left=Math.random()*window.innerWidth+"px";
-s.style.top=Math.random()*window.innerHeight+"px";
-
-document.body.appendChild(s);
-
-setTimeout(()=>s.remove(),1000);
+sky.appendChild(b)
 
 }
 
-if(opened==9){
+function show(i,balloon){
 
-setTimeout(finalPage,1500);
+opened++
+
+balloon.style.visibility="hidden"
+
+document.getElementById("popup").style.display="block"
+document.getElementById("img").src=i+".jpg"
+document.getElementById("msg").innerText=messages[i-1]
+
+if(opened===9){
+
+setTimeout(finalPage,1500)
 
 }
 
 }
 
 function closePop(){
-document.getElementById("popup").style.display="none";
-}
 
-/* final page */
+document.getElementById("popup").style.display="none"
+
+}
 
 function finalPage(){
 
@@ -208,10 +187,11 @@ document.body.innerHTML=`
 
 Happy Women's Day to My Smart Beautiful Sexy Strong Women 🎀✨🫶🏻🌻🪷🌸👑👑<br><br>
 
-Aaj ka din bas ek reminder hai ki aap kitni amazing ho but sach toh yeh hai ki aapko celebrate karne ke liye ek din kaafi nahi hai.  
+Aaj ka din bas ek reminder hai ki aap kitni amazing ho but sach toh yeh hai ki
+aapko celebrate karne ke liye ek din kaafi nahi hai.
 For me every day is My Women's Day ❤️👑✨🎀<br><br>
 
-Sach bolo toh bacha aapke aane ke baad meri life kaafi zyada beautiful ho gayi hai.  
+Sach bolo toh bacha aapke aane ke baad meri life kaafi zyada beautiful ho gayi hai.
 Pehle life normal thi par ab usme ek alag si happiness aa gayi hai.<br><br>
 
 Aapki smile, aapki baatein aur aapka caring nature meri life ko aur pyaara bana dete hain 🥹🎀🫶🏻<br><br>
@@ -222,7 +202,7 @@ Aap meri life mein ho uske liye main Bhagwan ji ka bohot shukraguzaar hoon 🙏�
 
 </div>
 
-`;
+`
 
 }
 
