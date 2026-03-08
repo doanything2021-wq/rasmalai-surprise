@@ -2,70 +2,37 @@
 <html>
 <head>
 <title>Happy Women's Day Rasmalai</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-
 body{
 font-family:Arial;
 text-align:center;
 background:linear-gradient(#ffe6f0,#ffffff);
-overflow:hidden;
-}
-
-h1{
-margin-top:25px;
-}
-
-.container{
-margin-top:40px;
 }
 
 .balloon{
 width:90px;
 height:110px;
 border-radius:50%;
+background:#ff4d6d;
 display:inline-block;
 margin:20px;
 cursor:pointer;
 position:relative;
-animation:float 3s infinite ease-in-out;
 }
-
-.balloon:nth-child(odd){
-background:radial-gradient(circle at 30% 30%,#ff8fab,#ff4d6d);
-}
-
-.balloon:nth-child(even){
-background:radial-gradient(circle at 30% 30%,#ffd166,#ff9f1c);
-}
-
-/* balloon tail */
 
 .balloon:after{
 content:"";
 width:2px;
-height:45px;
+height:40px;
 background:#555;
 position:absolute;
-bottom:-45px;
+bottom:-40px;
 left:50%;
-transform:translateX(-50%);
-}
-
-@keyframes float{
-
-0%{transform:translateY(0)}
-
-50%{transform:translateY(-10px)}
-
-100%{transform:translateY(0)}
-
 }
 
 .popup{
-
 display:none;
 position:fixed;
 top:50%;
@@ -73,46 +40,12 @@ left:50%;
 transform:translate(-50%,-50%);
 background:white;
 padding:20px;
-border-radius:15px;
-box-shadow:0 0 20px rgba(0,0,0,0.3);
-z-index:10;
-
+border-radius:10px;
 }
 
 .popup img{
-
-width:230px;
-border-radius:10px;
-
+width:220px;
 }
-
-button{
-
-margin-top:10px;
-padding:8px 15px;
-border:none;
-background:#ff4d6d;
-color:white;
-border-radius:6px;
-
-}
-
-/* star pop */
-
-.star{
-position:fixed;
-font-size:18px;
-color:gold;
-animation:starpop 1s forwards;
-}
-
-@keyframes starpop{
-
-0%{transform:scale(0)}
-100%{transform:scale(1.5) translateY(-80px);opacity:0}
-
-}
-
 </style>
 </head>
 
@@ -121,174 +54,44 @@ animation:starpop 1s forwards;
 <h1>Happy Women's Day My Rasmalai ✨</h1>
 <p>Pop all the balloons 🎈</p>
 
-<div class="container">
-
-<div class="balloon" onclick="show(1,this)"></div>
-<div class="balloon" onclick="show(2,this)"></div>
-<div class="balloon" onclick="show(3,this)"></div>
-<div class="balloon" onclick="show(4,this)"></div>
-<div class="balloon" onclick="show(5,this)"></div>
-<div class="balloon" onclick="show(6,this)"></div>
-<div class="balloon" onclick="show(7,this)"></div>
-<div class="balloon" onclick="show(8,this)"></div>
-<div class="balloon" onclick="show(9,this)"></div>
-
-</div>
+<div onclick="show(1)" class="balloon"></div>
+<div onclick="show(2)" class="balloon"></div>
+<div onclick="show(3)" class="balloon"></div>
+<div onclick="show(4)" class="balloon"></div>
+<div onclick="show(5)" class="balloon"></div>
+<div onclick="show(6)" class="balloon"></div>
+<div onclick="show(7)" class="balloon"></div>
+<div onclick="show(8)" class="balloon"></div>
+<div onclick="show(9)" class="balloon"></div>
 
 <div id="popup" class="popup">
-
 <img id="img">
-
 <p id="msg"></p>
-
 <button onclick="closePop()">Close</button>
-
 </div>
-
-<audio autoplay loop>
-
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9f0d7c.mp3?filename=romantic-background-112019.mp3">
-
-</audio>
 
 <script>
 
-let opened=0;
-
-const messages=[
-
+const text=[
 "My Little Rasmalai ✨🫀😍",
-
 "Cutiee woman holding less cute her flower ✨🎀",
-
-"Can I get some yoga lessons ma'am ji 😄🧘🏻‍♂️",
-
-"Bestest moment of my life 🤌🏻✨🎀",
-
+"Can I get some yoga lessons ma'am ji 😄",
+"Bestest moment of my life ✨",
 "My Snow Woman ✨😘",
-
-"My cutie panda 🐼 24/7 sleep mode",
-
-"My Sanskari Women 🌸✨🛐",
-
-"Koi itna khubsurat 24/7 kaise ho sakta hai 🧿",
-
+"My cutie panda 🐼 sleep mode",
+"My Sanskari Women 🌸✨",
+"Koi itna khubsurat kaise ho sakta hai 🧿",
 "My sweet Green Apple 🍏😋✨"
-
 ];
 
-function show(i,el){
-
-opened++;
-
-el.style.display="none";
-
+function show(i){
 document.getElementById("popup").style.display="block";
-
 document.getElementById("img").src=i+".jpg";
-
-document.getElementById("msg").innerText=messages[i-1];
-
-/* star burst */
-
-for(let k=0;k<8;k++){
-
-let s=document.createElement("div");
-
-s.className="star";
-
-s.innerHTML="⭐";
-
-s.style.left=Math.random()*window.innerWidth+"px";
-
-s.style.top=Math.random()*window.innerHeight+"px";
-
-document.body.appendChild(s);
-
-setTimeout(()=>s.remove(),1000);
-
-}
-
-if(opened==9){
-
-setTimeout(finalPage,1500)
-
-}
-
+document.getElementById("msg").innerText=text[i-1];
 }
 
 function closePop(){
-
 document.getElementById("popup").style.display="none";
-
-}
-
-function finalPage(){
-
-confetti();
-
-document.body.innerHTML=`
-
-<h1>Happy Women's Day My Rasmalai ✨</h1>
-
-<div style="max-width:500px;margin:auto;font-size:18px;line-height:1.6">
-
-Happy Women's Day to My Smart Beautiful Sexy Strong Women 🎀✨🫶🏻🌻🪷🌸👑👑<br><br>
-
-Aaj ka din bas ek reminder hai ki aap kitni amazing ho but sach toh yeh hai ki aapko celebrate karne ke liye ek din kaafi nahi hai.  
-For me every day is My Women's Day ❤️👑✨🎀<br><br>
-
-Sach bolo toh bacha aapke aane ke baad meri life kaafi zyada beautiful ho gayi hai.  
-Pehle life normal thi par ab usme ek alag si happiness aa gayi hai.<br><br>
-
-Aapki smile, aapki baatein aur aapka caring nature meri life ko aur pyaara bana dete hain 🥹🎀🫶🏻<br><br>
-
-Bacha aapke saath simple moments bhi special feel hote hain 🫂🫀❤️‍🔥✨🧿<br><br>
-
-Aap meri life mein ho uske liye main Bhagwan ji ka bohot shukraguzaar hoon 🙏🏻🛐
-
-</div>
-
-`;
-
-}
-
-function confetti(){
-
-for(let i=0;i<120;i++){
-
-let c=document.createElement("div");
-
-c.style.position="fixed";
-
-c.style.width="8px";
-
-c.style.height="8px";
-
-c.style.background="pink";
-
-c.style.left=Math.random()*100+"vw";
-
-c.style.top="-10px";
-
-document.body.appendChild(c);
-
-let fall=setInterval(()=>{
-
-c.style.top=parseFloat(c.style.top)+5+"px";
-
-if(parseFloat(c.style.top)>window.innerHeight){
-
-clearInterval(fall);
-
-c.remove();
-
-}
-
-},30)
-
-}
-
 }
 
 </script>
