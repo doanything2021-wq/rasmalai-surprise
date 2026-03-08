@@ -5,166 +5,125 @@
 <title>Happy Women's Day Rasmalai</title>
 
 <style>
+
 body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  text-align:center;
-  background:linear-gradient(#ffe6f0,#ffffff);
-  overflow:hidden;
+margin:0;
+overflow:hidden;
+font-family:Arial;
+background:linear-gradient(#ffe6f0,#ffffff);
+text-align:center;
 }
 
-h1{ margin-top:18px; }
-p.sub{ margin-top:6px; color:#444; }
+h1{
+margin-top:20px;
+}
 
 .sky{
-  position:relative;
-  width:100%;
-  height:85vh;
-  overflow:hidden;
+position:relative;
+width:100%;
+height:80vh;
 }
 
-/* Balloon */
+/* balloons */
+
 .balloon{
-  position:absolute;
-  width:80px;
-  height:100px;
-  border-radius:50% 50% 48% 48%;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:bold;
-  color:#fff;
-  user-select:none;
-  animation:floatUp linear forwards;
+width:80px;
+height:100px;
+border-radius:50%;
+position:absolute;
+cursor:pointer;
+animation:float 12s linear infinite;
 }
 
-/* balloon shine */
-.balloon::before{
-  content:"";
-  position:absolute;
-  top:18%;
-  left:22%;
-  width:18px;
-  height:28px;
-  border-radius:50%;
-  background:rgba(255,255,255,0.35);
+.balloon:nth-child(odd){
+background:radial-gradient(circle at 30% 30%,#ff8fab,#ff4d6d);
 }
 
-/* string */
-.balloon::after{
-  content:"";
-  position:absolute;
-  bottom:-40px;
-  left:50%;
-  transform:translateX(-50%);
-  width:2px;
-  height:40px;
-  background:#555;
+.balloon:nth-child(even){
+background:radial-gradient(circle at 30% 30%,#ffd166,#ff9f1c);
 }
 
-@keyframes floatUp{
-  from{ transform:translateY(0); }
-  to{ transform:translateY(-120vh); }
+/* tail */
+
+.balloon:after{
+content:"";
+width:2px;
+height:40px;
+background:#555;
+position:absolute;
+bottom:-40px;
+left:50%;
+transform:translateX(-50%);
 }
 
-/* pop effect */
-.pop{
-  animation:pop 0.25s ease-out forwards;
-}
-
-@keyframes pop{
-  to{
-    transform:scale(0);
-    opacity:0;
-  }
+@keyframes float{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-120vh);}
 }
 
 /* popup */
+
 .popup{
-  display:none;
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  background:#fff;
-  padding:18px;
-  border-radius:12px;
-  box-shadow:0 0 20px rgba(0,0,0,0.25);
-  z-index:10;
-  max-width:85vw;
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 0 25px rgba(0,0,0,0.3);
+z-index:10;
 }
 
 .popup img{
-  width:220px;
-  border-radius:10px;
+width:230px;
+border-radius:10px;
 }
 
 button{
-  margin-top:10px;
-  padding:8px 16px;
-  border:none;
-  border-radius:6px;
-  background:#ff4d6d;
-  color:white;
-  cursor:pointer;
+margin-top:10px;
+padding:8px 15px;
+border:none;
+background:#ff4d6d;
+color:white;
+border-radius:6px;
 }
 
 /* stars */
+
 .star{
-  position:fixed;
-  font-size:20px;
-  color:gold;
-  animation:starpop 1s forwards;
+position:fixed;
+color:gold;
+font-size:20px;
+animation:starpop 1s forwards;
 }
 
 @keyframes starpop{
-  0%{ transform:scale(0); }
-  100%{ transform:translateY(-80px) scale(1.5); opacity:0; }
+0%{transform:scale(0)}
+100%{transform:scale(1.5) translateY(-80px);opacity:0}
 }
 
-/* confetti */
-.confetti{
-  position:fixed;
-  width:8px;
-  height:8px;
-  background:pink;
-  top:-10px;
-  animation:fall linear forwards;
-}
-
-@keyframes fall{
-  to{ transform:translateY(110vh); }
-}
-
-.final{
-  max-width:520px;
-  margin:auto;
-  font-size:18px;
-  line-height:1.6;
-  padding:20px;
-}
 </style>
 </head>
 
 <body>
 
 <h1>Happy Women's Day My Rasmalai ✨</h1>
-<p class="sub">Pop all the balloons 🎈</p>
+<p>Pop the floating balloons 🎈</p>
 
 <div class="sky" id="sky"></div>
 
 <div id="popup" class="popup">
-  <img id="img">
-  <p id="msg"></p>
-  <button onclick="closePop()">Close</button>
+<img id="img">
+<p id="msg"></p>
+<button onclick="closePop()">Close</button>
 </div>
 
-<audio autoplay loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9f0d7c.mp3?filename=romantic-background-112019.mp3">
-</audio>
-
 <script>
+
+let opened=0;
+
 const messages=[
 "My Little Rasmalai ✨🫀😍",
 "Cutiee woman holding less cute her flower ✨🎀",
@@ -177,79 +136,75 @@ const messages=[
 "My sweet Green Apple 🍏😋✨"
 ];
 
-let opened=0;
 const sky=document.getElementById("sky");
 
-/* colors */
-const colors=[
-"#ff4d6d","#ff9f1c","#ffd166","#4cc9f0","#9b5de5",
-"#06d6a0","#f72585","#f77f00","#3a86ff"
-];
+/* create balloons */
 
-/* create balloons randomly */
 for(let i=1;i<=9;i++){
 
 let b=document.createElement("div");
 b.className="balloon";
-b.style.left=Math.random()*90+"vw";
-b.style.bottom="-120px";
-b.style.background=colors[i-1];
-b.style.animationDuration=(10+Math.random()*6)+"s";
-b.dataset.index=i;
 
-b.onclick=function(){
-popBalloon(this);
-};
+b.style.left=Math.random()*90+"%";
+b.style.animationDuration=(10+Math.random()*10)+"s";
+
+b.onclick=function(){show(i,b)};
 
 sky.appendChild(b);
+
 }
 
-function popBalloon(el){
+/* balloon click */
+
+function show(i,el){
 
 opened++;
-el.classList.add("pop");
 
-/* star burst */
-for(let k=0;k<7;k++){
-let s=document.createElement("div");
-s.className="star";
-s.innerHTML="⭐";
-s.style.left=Math.random()*window.innerWidth+"px";
-s.style.top=Math.random()*window.innerHeight+"px";
-document.body.appendChild(s);
-setTimeout(()=>s.remove(),1000);
-}
-
-let i=el.dataset.index;
+el.remove();
 
 document.getElementById("popup").style.display="block";
 document.getElementById("img").src=i+".jpg";
 document.getElementById("msg").innerText=messages[i-1];
 
-if(opened===9){
-setTimeout(finalPage,1500);
+/* star burst */
+
+for(let k=0;k<8;k++){
+
+let s=document.createElement("div");
+
+s.className="star";
+s.innerHTML="⭐";
+
+s.style.left=Math.random()*window.innerWidth+"px";
+s.style.top=Math.random()*window.innerHeight+"px";
+
+document.body.appendChild(s);
+
+setTimeout(()=>s.remove(),1000);
+
 }
+
+if(opened==9){
+
+setTimeout(finalPage,1500);
+
+}
+
 }
 
 function closePop(){
 document.getElementById("popup").style.display="none";
 }
 
+/* final page */
+
 function finalPage(){
 
-/* confetti */
-for(let i=0;i<120;i++){
-let c=document.createElement("div");
-c.className="confetti";
-c.style.left=Math.random()*100+"vw";
-c.style.background=["pink","gold","#ff4d6d","#ffd166"][Math.floor(Math.random()*4)];
-c.style.animationDuration=(3+Math.random()*3)+"s";
-document.body.appendChild(c);
-}
-
 document.body.innerHTML=`
+
 <h1>Happy Women's Day My Rasmalai ✨</h1>
-<div class="final">
+
+<div style="max-width:500px;margin:auto;font-size:18px;line-height:1.6">
 
 Happy Women's Day to My Smart Beautiful Sexy Strong Women 🎀✨🫶🏻🌻🪷🌸👑👑<br><br>
 
@@ -266,8 +221,11 @@ Bacha aapke saath simple moments bhi special feel hote hain 🫂🫀❤️‍�
 Aap meri life mein ho uske liye main Bhagwan ji ka bohot shukraguzaar hoon 🙏🏻🛐
 
 </div>
+
 `;
+
 }
+
 </script>
 
 </body>
