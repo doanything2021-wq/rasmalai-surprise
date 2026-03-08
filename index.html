@@ -2,38 +2,47 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Happy Women's Day Rasmalai</title>
 
 <style>
 
 body{
 margin:0;
-overflow:hidden;
 font-family:Arial;
-background:linear-gradient(#ffd6e7,#ffffff);
+background:linear-gradient(#ffd6e7,#fff);
+overflow:hidden;
 text-align:center;
 }
 
-h1{
+#title{
 position:absolute;
 top:10px;
 width:100%;
+font-size:28px;
+font-weight:bold;
 }
 
 #sky{
-position:relative;
 width:100vw;
 height:100vh;
+position:relative;
 }
 
+/* balloons */
+
 .balloon{
+
 width:80px;
 height:100px;
 border-radius:50%;
 position:absolute;
 cursor:pointer;
+
 background:radial-gradient(circle at 30% 30%,#ff9bb3,#ff4d6d);
-animation:float 7s ease-in-out infinite;
+
+animation:float 6s ease-in-out infinite;
+
 }
 
 .balloon:nth-child(even){
@@ -50,63 +59,118 @@ bottom:-45px;
 left:50%;
 }
 
+/* floating animation */
+
 @keyframes float{
+
 0%{transform:translateY(0)}
-50%{transform:translateY(-20px)}
+50%{transform:translateY(-18px)}
 100%{transform:translateY(0)}
+
 }
 
 /* popup */
 
 #popup{
+
 display:none;
 position:fixed;
+
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
+
 background:white;
+
 padding:20px;
-border-radius:15px;
+
+border-radius:12px;
+
 box-shadow:0 0 20px rgba(0,0,0,0.3);
-z-index:5;
+
+z-index:10;
+
+width:280px;
+
 }
 
 #popup img{
-width:240px;
+width:100%;
 border-radius:10px;
 }
 
 button{
+
 margin-top:10px;
+
 padding:8px 15px;
+
 border:none;
+
 background:#ff4d6d;
+
 color:white;
+
 border-radius:6px;
-cursor:pointer;
+
 }
 
 /* star burst */
 
 .star{
+
 position:absolute;
+
+font-size:18px;
+
 color:gold;
-font-size:20px;
-animation:burst 0.7s ease-out forwards;
+
+animation:burst .7s forwards;
+
 }
 
 @keyframes burst{
+
 0%{opacity:1;transform:scale(0)}
+
 100%{opacity:0;transform:scale(2) translateY(-30px)}
+
 }
 
-/* typing text */
+/* typing screen */
 
-#typing{
-font-size:32px;
+#typingScreen{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+height:100vh;
+
+font-size:40px;
+
 font-weight:bold;
-margin-top:120px;
+
 color:#ff2e63;
+
+}
+
+/* final message */
+
+#final{
+
+max-width:700px;
+
+margin:auto;
+
+padding:30px;
+
+line-height:1.8;
+
+font-size:20px;
+
 }
 
 </style>
@@ -114,31 +178,44 @@ color:#ff2e63;
 
 <body>
 
-<h1>Pop all the balloons 🎈</h1>
+<div id="title">Pop all the balloons 🎈</div>
 
 <div id="sky"></div>
 
 <div id="popup">
+
 <img id="img">
+
 <p id="msg"></p>
+
 <button onclick="closePop()">Close</button>
+
 </div>
 
 <script>
 
 const sky=document.getElementById("sky")
+
 let opened=0
 
 const messages=[
 
 "My Little Rasmalai ✨🫀😍",
+
 "Cutiee women holding less cute her flower ✨🎀",
+
 "Can I get some yoga lessons ma'am ji 😄🧘🏻‍♂️",
+
 "Bestest moment of my life 🤌🏻✨🎀",
+
 "My Snow women ✨😘",
+
 "My cutie Panda 🐼✨🎀😘",
+
 "My Sanskari Women 🌸✨🛐",
+
 "Itni Khubsurat koi kaise dekh sakta hai 24/7 🧿✨",
+
 "My sweet Green Apple 🍏😋✨"
 
 ]
@@ -148,26 +225,33 @@ const messages=[
 for(let i=1;i<=9;i++){
 
 let b=document.createElement("div")
+
 b.className="balloon"
 
 b.style.left=Math.random()*90+"vw"
-b.style.top=Math.random()*80+"vh"
 
-b.onclick=function(){show(i,b)}
+b.style.top=Math.random()*75+"vh"
+
+b.onclick=function(){popBalloon(i,b)}
 
 sky.appendChild(b)
 
 }
+
+/* star effect */
 
 function starBurst(x,y){
 
 for(let i=0;i<6;i++){
 
 let s=document.createElement("div")
+
 s.className="star"
+
 s.innerHTML="⭐"
 
 s.style.left=x+"px"
+
 s.style.top=y+"px"
 
 document.body.appendChild(s)
@@ -178,22 +262,25 @@ setTimeout(()=>s.remove(),700)
 
 }
 
-function show(i,balloon){
+function popBalloon(i,b){
 
 opened++
 
-let rect=balloon.getBoundingClientRect()
+let rect=b.getBoundingClientRect()
+
 starBurst(rect.left,rect.top)
 
-balloon.style.visibility="hidden"
+b.style.visibility="hidden"
 
 document.getElementById("popup").style.display="block"
+
 document.getElementById("img").src=i+".jpg"
+
 document.getElementById("msg").innerText=messages[i-1]
 
 if(opened===9){
 
-setTimeout(showTyping,1500)
+setTimeout(showTyping,1200)
 
 }
 
@@ -205,11 +292,14 @@ document.getElementById("popup").style.display="none"
 
 }
 
+/* typing scene */
+
 function showTyping(){
 
-document.body.innerHTML=`<div id="typing"></div>`
+document.body.innerHTML=`<div id="typingScreen"><span id="typing"></span></div>`
 
 let text="I Love You Hetal ❤️"
+
 let i=0
 
 function type(){
@@ -217,10 +307,14 @@ function type(){
 if(i<text.length){
 
 document.getElementById("typing").innerHTML+=text.charAt(i)
+
 i++
+
 setTimeout(type,100)
 
-}else{
+}
+
+else{
 
 setTimeout(finalPage,1200)
 
@@ -232,23 +326,45 @@ type()
 
 }
 
+/* final message */
+
 function finalPage(){
 
 document.body.innerHTML=`
 
+<div id="final">
+
 <h1>Happy Women's Day, My Rasmalai ✨</h1>
 
-<div style="max-width:520px;margin:auto;font-size:18px;line-height:1.6">
+<p>
 
-Happy Women's Day to My Smart Beautiful Sexy Strong Women🎀✨🫶🏻🌻🪷🌸👑👑 You're truly Incredible one and only My Hetal Bacha💪🏻🦵🏻🧘🏻‍♂️✨<br><br>
+Happy Women's Day to My Smart Beautiful Sexy Strong Women🎀✨🫶🏻🌻🪷🌸👑👑 You're truly Incredible one and only My Hetal Bacha💪🏻🦵🏻🧘🏻‍♂️✨
 
-Aaj ka din bas ek reminder hai ki aap kitni amazing ho but sach toh yeh hai ki aapko celebrate karne ke liye ek din kaafi nahi haifor me every day is My Women's Day 🏵️ ❤️ 👑✨🎀<br><br>
+</p>
 
-Sach bolo toh bacha aapke aane ke baad meri life kaafi zyada beautiful ho gayi hai Pehle life normal thi par ab usme ek alag si happiness aa gayi hai Aapki smile, aapki baatein, aur aapka simple sa caring Nature yeh sab meri life ko aur pyaara bana dete hain🥹🎀🫶🏻<br><br>
+<p>
 
-Bacha Aapke saath simple moments bhi special feel hote hain🫂🫀❤️‍🔥✨🧿<br><br>
+Aaj ka din bas ek reminder hai ki aap kitni amazing ho but sach toh yeh hai ki aapko celebrate karne ke liye ek din kaafi nahi haifor me every day is My Women's Day 🏵️ ❤️ 👑✨🎀
+
+</p>
+
+<p>
+
+Sach bolo toh bacha aapke aane ke baad meri life kaafi zyada beautiful ho gayi hai Pehle life normal thi par ab usme ek alag si happiness aa gayi hai Aapki smile, aapki baatein, aur aapka simple sa caring Nature yeh sab meri life ko aur pyaara bana dete hain🥹🎀🫶🏻
+
+</p>
+
+<p>
+
+Bacha Aapke saath simple moments bhi special feel hote hain🫂🫀❤️‍🔥✨🧿
+
+</p>
+
+<p>
 
 Aap jaise women meri life me uske liye me bohot zyada thankful ho bhagwan ji 🙏🏻🛐😭🥹
+
+</p>
 
 </div>
 
@@ -258,19 +374,28 @@ confetti()
 
 }
 
+/* confetti */
+
 function confetti(){
 
-for(let i=0;i<120;i++){
+for(let i=0;i<100;i++){
 
 let c=document.createElement("div")
+
 c.style.position="fixed"
+
 c.style.width="6px"
+
 c.style.height="6px"
+
 c.style.background=["#ff4d6d","#ffd166","#2ec4b6"][Math.floor(Math.random()*3)]
+
 c.style.left=Math.random()*100+"vw"
+
 c.style.top="-10px"
-c.style.opacity="0.8"
+
 c.style.borderRadius="50%"
+
 c.style.transition="top 3s linear"
 
 document.body.appendChild(c)
