@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Happy Women's Day Rasmalai</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+background:linear-gradient(#ffe6f0,#ffffff);
+}
+
+.balloon{
+width:100px;
+height:120px;
+border-radius:50%;
+background:red;
+display:inline-block;
+margin:20px;
+cursor:pointer;
+}
+
+.popup{
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+padding:20px;
+border-radius:10px;
+}
+
+.popup img{
+width:200px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Happy Women's Day My Rasmalai ✨</h1>
+<p>Pop the balloons 🎈</p>
+
+<div class="balloon" onclick="show(1)"></div>
+<div class="balloon" onclick="show(2)"></div>
+<div class="balloon" onclick="show(3)"></div>
+<div class="balloon" onclick="show(4)"></div>
+<div class="balloon" onclick="show(5)"></div>
+<div class="balloon" onclick="show(6)"></div>
+<div class="balloon" onclick="show(7)"></div>
+<div class="balloon" onclick="show(8)"></div>
+<div class="balloon" onclick="show(9)"></div>
+
+<div id="popup" class="popup">
+<img id="img">
+<p id="msg"></p>
+<button onclick="closePop()">Close</button>
+</div>
+
+<script>
+
+const data = [
+
+{img:"1.jpg",msg:"My Little Rasmalai ✨"},
+{img:"2.jpg",msg:"The real flower here is you 🌸"},
+{img:"3.jpg",msg:"Ma'am ji… when are my yoga lessons starting? 😄"},
+{img:"4.jpg",msg:"One of the best moments of my life ✨"},
+{img:"5.jpg",msg:"My amazing woman ✨"},
+{img:"6.jpg",msg:"My cutie panda 24/7 sleep mode 🐼"},
+{img:"7.jpg",msg:"My beautiful sanskari queen 🌸"},
+{img:"8.jpg",msg:"Koi itna khubsurat 24/7 kaise ho sakta hai 🧿"},
+{img:"9.jpg",msg:"My sweet Green Apple 🍏😋✨"}
+
+];
+
+function show(i){
+
+document.getElementById("popup").style.display="block";
+
+document.getElementById("img").src=data[i-1].img;
+
+document.getElementById("msg").innerText=data[i-1].msg;
+
+}
+
+function closePop(){
+
+document.getElementById("popup").style.display="none";
+
+}
+
+</script>
+
+</body>
+</html>
